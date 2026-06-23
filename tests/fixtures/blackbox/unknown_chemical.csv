@@ -1,0 +1,3 @@
+strain,chemical,concentration,replicate,experiment,time,luminescence
+BL011,Control,0,1,EXP-001,0,1000
+BL011,Glyphosate,5,1,EXP-001,0,1200

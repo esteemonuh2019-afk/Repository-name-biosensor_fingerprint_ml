@@ -1,0 +1,271 @@
+{
+  "feature_columns": [
+    "auc_zexp",
+    "max_signal_zexp",
+    "min_signal_zexp",
+    "time_to_peak_zexp",
+    "initial_slope_zexp",
+    "final_signal_zexp",
+    "auc_zstrain_exp",
+    "max_signal_zstrain_exp",
+    "min_signal_zstrain_exp",
+    "time_to_peak_zstrain_exp",
+    "initial_slope_zstrain_exp",
+    "final_signal_zstrain_exp"
+  ],
+  "classification": {
+    "task_type": "classification",
+    "per_experiment": [
+      {
+        "held_out_experiment": 1.0,
+        "train_experiments": [
+          2.0,
+          3.0,
+          4.0,
+          5.0,
+          6.0
+        ],
+        "test_experiments": [
+          1.0
+        ],
+        "test_rows": 729,
+        "metrics": {
+          "accuracy": 0.40054869684499317,
+          "macro_precision": 0.36387866823323084,
+          "macro_recall": 0.3975129198966408,
+          "macro_f1": 0.3507445882351348
+        }
+      },
+      {
+        "held_out_experiment": 2.0,
+        "train_experiments": [
+          1.0,
+          3.0,
+          4.0,
+          5.0,
+          6.0
+        ],
+        "test_experiments": [
+          2.0
+        ],
+        "test_rows": 726,
+        "metrics": {
+          "accuracy": 0.47107438016528924,
+          "macro_precision": 0.4877977694198317,
+          "macro_recall": 0.4696428571428571,
+          "macro_f1": 0.4651054751306516
+        }
+      },
+      {
+        "held_out_experiment": 3.0,
+        "train_experiments": [
+          1.0,
+          2.0,
+          4.0,
+          5.0,
+          6.0
+        ],
+        "test_experiments": [
+          3.0
+        ],
+        "test_rows": 726,
+        "metrics": {
+          "accuracy": 0.5206611570247934,
+          "macro_precision": 0.5556169355014696,
+          "macro_recall": 0.5192460317460318,
+          "macro_f1": 0.5203538075211928
+        }
+      },
+      {
+        "held_out_experiment": 4.0,
+        "train_experiments": [
+          1.0,
+          2.0,
+          3.0,
+          5.0,
+          6.0
+        ],
+        "test_experiments": [
+          4.0
+        ],
+        "test_rows": 726,
+        "metrics": {
+          "accuracy": 0.44077134986225897,
+          "macro_precision": 0.49773336045465993,
+          "macro_recall": 0.439484126984127,
+          "macro_f1": 0.43041042410808394
+        }
+      },
+      {
+        "held_out_experiment": 5.0,
+        "train_experiments": [
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          6.0
+        ],
+        "test_experiments": [
+          5.0
+        ],
+        "test_rows": 723,
+        "metrics": {
+          "accuracy": 0.18810511756569848,
+          "macro_precision": 0.27795402438819355,
+          "macro_recall": 0.1877371273712737,
+          "macro_f1": 0.18692952608957322
+        }
+      },
+      {
+        "held_out_experiment": 6.0,
+        "train_experiments": [
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0
+        ],
+        "test_experiments": [
+          6.0
+        ],
+        "test_rows": 15,
+        "metrics": {
+          "accuracy": 0.3333333333333333,
+          "macro_precision": 0.25,
+          "macro_recall": 0.08333333333333333,
+          "macro_f1": 0.125
+        }
+      }
+    ],
+    "mean_metrics": {
+      "accuracy": 0.39241567246606107,
+      "macro_precision": 0.40549679299956426,
+      "macro_recall": 0.34949273274571063,
+      "macro_f1": 0.34642397018077276
+    }
+  },
+  "regression": {
+    "task_type": "regression",
+    "per_experiment": [
+      {
+        "held_out_experiment": 1.0,
+        "train_experiments": [
+          2.0,
+          3.0,
+          4.0,
+          5.0,
+          6.0
+        ],
+        "test_experiments": [
+          1.0
+        ],
+        "test_rows": 729,
+        "metrics": {
+          "r2": 0.012207334089825661,
+          "rmse": 193.33162152150928,
+          "mae": 155.31021604938272
+        }
+      },
+      {
+        "held_out_experiment": 2.0,
+        "train_experiments": [
+          1.0,
+          3.0,
+          4.0,
+          5.0,
+          6.0
+        ],
+        "test_experiments": [
+          2.0
+        ],
+        "test_rows": 726,
+        "metrics": {
+          "r2": -0.021877588147128035,
+          "rmse": 196.91515964175917,
+          "mae": 168.10181528925617
+        }
+      },
+      {
+        "held_out_experiment": 3.0,
+        "train_experiments": [
+          1.0,
+          2.0,
+          4.0,
+          5.0,
+          6.0
+        ],
+        "test_experiments": [
+          3.0
+        ],
+        "test_rows": 726,
+        "metrics": {
+          "r2": 0.0791408263920732,
+          "rmse": 186.92884569640685,
+          "mae": 155.4039588842975
+        }
+      },
+      {
+        "held_out_experiment": 4.0,
+        "train_experiments": [
+          1.0,
+          2.0,
+          3.0,
+          5.0,
+          6.0
+        ],
+        "test_experiments": [
+          4.0
+        ],
+        "test_rows": 726,
+        "metrics": {
+          "r2": 0.04133141640418547,
+          "rmse": 190.72778379379335,
+          "mae": 162.2457626033058
+        }
+      },
+      {
+        "held_out_experiment": 5.0,
+        "train_experiments": [
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          6.0
+        ],
+        "test_experiments": [
+          5.0
+        ],
+        "test_rows": 723,
+        "metrics": {
+          "r2": -0.3046882084079734,
+          "rmse": 222.8146584944643,
+          "mae": 204.02852427385892
+        }
+      },
+      {
+        "held_out_experiment": 6.0,
+        "train_experiments": [
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0
+        ],
+        "test_experiments": [
+          6.0
+        ],
+        "test_rows": 15,
+        "metrics": {
+          "r2": -131.7014153632103,
+          "rmse": 225.02967296336718,
+          "mae": 219.49679999999992
+        }
+      }
+    ],
+    "mean_metrics": {
+      "r2": -21.98255026381322,
+      "rmse": 202.62462368521668,
+      "mae": 177.4311795166835
+    }
+  }
+}

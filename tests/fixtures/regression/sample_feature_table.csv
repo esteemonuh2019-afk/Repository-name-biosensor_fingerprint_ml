@@ -1,0 +1,4 @@
+strain,chemical,concentration,auc,max_signal,time_to_peak
+BL011,Diazinon,5,4500.0,1250.0,5
+BL027,DEET,5,3900.0,990.0,0
+BL029,Propoxur,50,5100.0,1410.0,10

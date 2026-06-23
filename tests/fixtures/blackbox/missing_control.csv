@@ -1,0 +1,4 @@
+strain,chemical,concentration,replicate,experiment,time,luminescence
+BL011,Diazinon,5,1,EXP-001,0,1005
+BL011,Diazinon,5,1,EXP-001,5,1250
+BL027,DEET,5,1,EXP-001,0,990

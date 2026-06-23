@@ -1,0 +1,3 @@
+strain,chemical,concentration,replicate,experiment,time
+BL011,Control,0,1,EXP-001,0
+BL011,Diazinon,5,1,EXP-001,0
