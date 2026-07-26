@@ -22,3 +22,9 @@ outputs/tables/cleaned_data.csv
 
 # Large generated tables
 outputs/tables/cleaned_data.csv
+
+# Generated analysis outputs
+outputs/
+.pytest_tmp_*/
+__pycache__/
+*.pyc

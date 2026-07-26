@@ -1,0 +1,38 @@
+Feature Name,Short Name,Category,Units,Core/Optional,Depends On,Requires QC,Requires Normalisation
+Baseline Luminescence,baseline_luminescence,Signal Intensity,RLU,Core,"time ordering; baseline estimation; QC",Yes,No
+Baseline Variability,baseline_variability,Signal Intensity,RLU,Recommended,"time ordering; baseline estimation; QC",Yes,No
+Maximum Luminescence,max_luminescence,Signal Intensity,RLU,Core,"QC",Yes,No
+Minimum Luminescence,min_luminescence,Signal Intensity,RLU,Core,"QC",Yes,No
+Endpoint Luminescence,endpoint_luminescence,Signal Intensity,RLU,Core,"time ordering; QC",Yes,No
+Dynamic Range,dynamic_range,Signal Intensity,RLU,Core,"QC",Yes,No
+Mean Luminescence,mean_luminescence,Signal Intensity,RLU,Core,"QC",Yes,No
+Median Luminescence,median_luminescence,Signal Intensity,RLU,Recommended,"QC",Yes,No
+Signal Standard Deviation,signal_sd,Signal Intensity,RLU,Core,"QC",Yes,No
+Signal Coefficient of Variation,signal_cv,Signal Intensity,unitless,Core,"QC",Yes,No
+Time to Peak,time_to_peak,Temporal Features,minutes,Core,"time ordering; peak detection; QC",Yes,No
+Time to Minimum,time_to_minimum,Temporal Features,minutes,Recommended,"time ordering; trough detection; QC",Yes,No
+Response Latency,response_latency,Temporal Features,minutes,Experimental,"time ordering; baseline estimation; peak detection; trough detection; curve smoothing; QC",Yes,No
+Recovery Time,recovery_time,Temporal Features,minutes,Experimental,"time ordering; baseline estimation; peak detection; trough detection; curve smoothing; QC",Yes,No
+Peak Width,peak_width,Temporal Features,minutes,Experimental,"time ordering; baseline estimation; peak detection; curve smoothing; QC",Yes,No
+Half-Maximum Duration,half_max_duration,Temporal Features,minutes,Recommended,"time ordering; baseline estimation; peak detection; curve smoothing; QC",Yes,No
+Total Area Under Curve,auc_total,Area Features,RLU * minutes,Core,"time ordering; QC",Yes,No
+Positive Area,auc_positive,Area Features,RLU * minutes,Recommended,"time ordering; baseline estimation; QC",Yes,No
+Negative Area,auc_negative,Area Features,RLU * minutes,Recommended,"time ordering; baseline estimation; QC",Yes,No
+Normalised Area,auc_normalised,Area Features,unitless,Recommended,"time ordering; baseline estimation; normalisation; QC",Yes,Yes
+Initial Slope,initial_slope,Slope Features,RLU per minute,Core,"time ordering; QC",Yes,No
+Maximum Slope,max_slope,Slope Features,RLU per minute,Core,"time ordering; curve smoothing; QC",Yes,No
+Minimum Slope,min_slope,Slope Features,RLU per minute,Core,"time ordering; curve smoothing; QC",Yes,No
+Average Slope,average_slope,Slope Features,RLU per minute,Recommended,"time ordering; QC",Yes,No
+Recovery Slope,recovery_slope,Slope Features,RLU per minute,Recommended,"time ordering; baseline estimation; peak detection; trough detection; curve smoothing; QC",Yes,No
+Maximum Fold Change,max_fold_change,Relative Response,unitless,Core,"baseline estimation; QC",Yes,No
+Minimum Fold Change,min_fold_change,Relative Response,unitless,Recommended,"baseline estimation; QC",Yes,No
+Log2 Fold Change,log2_fold_change,Relative Response,log2 unitless ratio,Recommended,"time ordering; baseline estimation; QC",Yes,No
+Normalised Endpoint,normalised_endpoint,Relative Response,method-specific,Optional,"time ordering; baseline estimation; normalisation; QC",Yes,Yes
+Peak/Baseline Ratio,peak_baseline_ratio,Relative Response,unitless,Optional,"baseline estimation; peak detection; QC",Yes,No
+Endpoint/Baseline Ratio,endpoint_baseline_ratio,Relative Response,unitless,Core,"time ordering; baseline estimation; QC",Yes,No
+Signal-to-Noise Ratio,signal_to_noise_ratio,Quality Metrics,unitless,Optional,"baseline estimation; QC",Yes,No
+Number of Valid Observations,valid_observation_count,Quality Metrics,count,Core,"QC",Yes,No
+Missing Observations,missing_observation_count,Quality Metrics,count,Core,"QC",Yes,No
+Duplicate Timestamp Count,duplicate_timestamp_count,Quality Metrics,count,Core,"time ordering; QC",Yes,No
+QC Flag Count,qc_flag_count,Quality Metrics,count,Core,"QC",Yes,No
+Feature Confidence Score,feature_confidence_score,Quality Metrics,unitless,Core,"time ordering; baseline estimation; peak detection; curve smoothing; normalisation; QC",Yes,No
