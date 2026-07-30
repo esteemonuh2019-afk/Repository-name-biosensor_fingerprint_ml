@@ -11,7 +11,7 @@ The fingerprint dataset is intended to become the shared input representation fo
 The fingerprint package lives in `src/fingerprint/`.
 
 - `fingerprint_builder.py` builds fingerprints from a `FeatureValidationResult`.
-- `fingerprint_dataset.py` stores the original and normalised fingerprint tables and writes output artifacts.
+- `fingerprint_dataset.py` stores the original, normalised, and consensus fingerprint tables and writes output artifacts.
 - `fingerprint_qc.py` audits fingerprint structure and exclusions.
 - `fingerprint_similarity.py` exposes reusable distance functions and matrix writers.
 
@@ -96,7 +96,27 @@ Implemented metrics:
 - Cosine distance: `1 - cosine similarity`.
 - Correlation distance: `1 - Pearson correlation` across feature dimensions.
 
-Distance matrices are written from the normalised fingerprint matrix. Rows excluded from fingerprint construction are not included in distance matrices because distance calculations require finite numeric values.
+Distance matrices are written from normalised fingerprints. Rows excluded from fingerprint construction are not included in distance matrices because distance calculations require finite numeric values.
+
+Full pairwise distance matrices scale quadratically: `N` fingerprints require `N x N` distances per metric. For thousands of individual fingerprints this can produce gigabyte-scale CSV files. Therefore, the default distance mode is now `consensus`, not individual.
+
+Distance output modes:
+
+- `none`: write no distance matrices.
+- `consensus`: default; group fingerprints by `Strain`, `Chemical`, and `Concentration`, then calculate distances among consensus fingerprints.
+- `individual`: explicit opt-in; calculate distances among individual fingerprints only when the row count is within the configured safety threshold, or when `--allow-large-distance-matrix` is supplied.
+
+The default individual safety threshold is `2,000` rows.
+
+## Consensus Fingerprints
+
+Consensus fingerprints preserve the biological grouping dimensions:
+
+- `Strain`
+- `Chemical`
+- `Concentration`
+
+The default policy never averages across strains and never averages across concentrations. Within each group, consensus feature values are medians of individual fingerprint features. A separate long-form consensus summary reports mean, standard deviation, coefficient of variation, finite count, replicate count, and QC status for each feature.
 
 ## Output Artifacts
 
@@ -116,12 +136,24 @@ writes:
 
 - `fingerprint_dataset.csv`
 - `fingerprint_dataset_normalized.csv`
+- `consensus_fingerprint_dataset.csv`
+- `consensus_fingerprint_summary.csv`
 - `fingerprint_summary.json`
 - `fingerprint_qc_report.md`
-- `distance_matrix_euclidean.csv`
-- `distance_matrix_cosine.csv`
-- `distance_matrix_manhattan.csv`
-- `distance_matrix_correlation.csv`
+- `consensus_distance_matrix_euclidean.csv`
+- `consensus_distance_matrix_cosine.csv`
+- `consensus_distance_matrix_manhattan.csv`
+- `consensus_distance_matrix_correlation.csv`
+
+Individual distance matrices keep the historical names `distance_matrix_*.csv`, but they are written only when `--distance-mode individual` is supplied.
+
+Examples:
+
+```bash
+python scripts/build_fingerprint_dataset.py "C:\Users\USER\Desktop\biosensor_phase2_source_files" --distance-mode consensus
+python scripts/build_fingerprint_dataset.py --feature-file outputs/features/feature_dataset.csv --distance-mode none
+python scripts/build_fingerprint_dataset.py --feature-file outputs/features/feature_dataset.csv --distance-mode individual --max-individual-distance-rows 2000
+```
 
 Existing non-empty output directories are not overwritten unless `--overwrite` is supplied.
 

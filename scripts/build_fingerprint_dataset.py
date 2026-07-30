@@ -19,7 +19,10 @@ from src.data_ingestion.excel_reader import read_biosensor_excel
 from src.data_ingestion.file_discovery import discover_biosensor_files
 from src.feature_engine import extract_features
 from src.feature_validation import validate_features
-from src.fingerprint import build_fingerprint_dataset
+from src.fingerprint import (
+    DEFAULT_MAX_INDIVIDUAL_DISTANCE_ROWS,
+    build_fingerprint_dataset,
+)
 
 
 DEFAULT_OUTPUT_DIR = PROJECT_ROOT / "outputs" / "fingerprints"
@@ -34,18 +37,27 @@ def main(argv: list[str] | None = None) -> int:
         fingerprint_dataset = build_fingerprint_dataset(
             validation_result,
             normalization=args.normalization,
+            consensus_group_columns=_parse_consensus_group_columns(args.consensus_group_columns),
+        )
+        _print_distance_estimates(
+            fingerprint_dataset,
+            distance_mode=args.distance_mode,
+            max_individual_distance_rows=args.max_individual_distance_rows,
+            allow_large_distance_matrix=args.allow_large_distance_matrix,
         )
         output_paths = fingerprint_dataset.write_outputs(
             args.output_dir,
             overwrite=args.overwrite,
-            write_distances=True,
+            distance_mode=args.distance_mode,
+            max_individual_distance_rows=args.max_individual_distance_rows,
+            allow_large_distance_matrix=args.allow_large_distance_matrix,
             distance_chunk_size=args.distance_chunk_size,
         )
     except (FileExistsError, FileNotFoundError, NotADirectoryError, RuntimeError, TypeError, ValueError) as error:
         print(f"Fingerprint build failed: {error}", file=sys.stderr)
         return 1
 
-    _print_summary(fingerprint_dataset, output_paths)
+    _print_summary(fingerprint_dataset, output_paths, distance_mode=args.distance_mode)
     return 0
 
 
@@ -81,6 +93,28 @@ def _parse_args(argv: list[str] | None) -> argparse.Namespace:
         help="Rows per chunk when writing large distance matrices.",
     )
     parser.add_argument(
+        "--distance-mode",
+        choices=["none", "consensus", "individual"],
+        default="consensus",
+        help="Distance output mode. Consensus is the safe default.",
+    )
+    parser.add_argument(
+        "--max-individual-distance-rows",
+        type=int,
+        default=DEFAULT_MAX_INDIVIDUAL_DISTANCE_ROWS,
+        help="Maximum fingerprint rows allowed for individual-level distance matrices.",
+    )
+    parser.add_argument(
+        "--allow-large-distance-matrix",
+        action="store_true",
+        help="Explicitly allow individual distance matrices above the row threshold.",
+    )
+    parser.add_argument(
+        "--consensus-group-columns",
+        default="Strain,Chemical,Concentration",
+        help="Comma-separated columns for consensus grouping.",
+    )
+    parser.add_argument(
         "--overwrite",
         action="store_true",
         help="Replace existing files in the output directory.",
@@ -104,6 +138,13 @@ def _load_feature_input(args: argparse.Namespace):
     return extract_features(canonical_dataframe)
 
 
+def _parse_consensus_group_columns(value: str) -> list[str]:
+    columns = [part.strip() for part in str(value).split(",") if part.strip()]
+    if not columns:
+        raise ValueError("At least one consensus grouping column is required.")
+    return columns
+
+
 def _build_canonical_dataframe(source_folder: Path) -> pd.DataFrame:
     discovery = discover_biosensor_files(source_folder)
     read_results = []
@@ -122,13 +163,14 @@ def _build_canonical_dataframe(source_folder: Path) -> pd.DataFrame:
     return build_canonical_dataset(read_results).dataframe
 
 
-def _print_summary(fingerprint_dataset, output_paths: list[Path]) -> None:
+def _print_summary(fingerprint_dataset, output_paths: list[Path], *, distance_mode: str) -> None:
     summary = fingerprint_dataset.summary
     qc = fingerprint_dataset.qc.summary
     normalization = fingerprint_dataset.normalization_parameters
 
     print(f"feature rows: {summary['feature_rows']}")
     print(f"fingerprint rows: {summary['fingerprint_rows']}")
+    print(f"consensus fingerprint rows: {summary['consensus_fingerprint_rows']}")
     print(f"excluded rows: {summary['excluded_rows']}")
     print(f"duplicate fingerprints: {qc['duplicate_fingerprint_row_count']}")
     print(f"duplicated Measurement_Unit_ID rows: {qc['duplicated_measurement_unit_row_count']}")
@@ -145,10 +187,35 @@ def _print_summary(fingerprint_dataset, output_paths: list[Path]) -> None:
         "distance matrix dimensions: "
         f"{summary['distance_matrix_rows']} x {summary['distance_matrix_columns']}"
     )
+    print(f"distance mode: {distance_mode}")
     print("distance metrics: euclidean, cosine, manhattan, correlation")
     print("output paths:")
     for path in output_paths:
         print(f"- {path}")
+
+
+def _print_distance_estimates(
+    fingerprint_dataset,
+    *,
+    distance_mode: str,
+    max_individual_distance_rows: int,
+    allow_large_distance_matrix: bool,
+) -> None:
+    estimates = fingerprint_dataset.distance_estimates()
+    selected = estimates[distance_mode] if distance_mode in estimates else None
+    print(f"distance mode requested: {distance_mode}")
+    if selected is None:
+        print("distance size estimate: no distance matrices requested")
+        return
+    print("distance size estimate:")
+    print(f"- rows: {selected['rows']}")
+    print(f"- matrix dimensions: {selected['rows']} x {selected['columns']}")
+    print(f"- cells: {selected['cells']}")
+    print(f"- estimated memory bytes: {selected['estimated_memory_bytes']}")
+    print(f"- estimated CSV bytes per matrix: {selected['estimated_csv_bytes']}")
+    if distance_mode == "individual":
+        print(f"- max individual distance rows: {max_individual_distance_rows}")
+        print(f"- large matrix override: {allow_large_distance_matrix}")
 
 
 if __name__ == "__main__":

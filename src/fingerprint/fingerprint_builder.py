@@ -16,6 +16,12 @@ from src.fingerprint.fingerprint_qc import evaluate_fingerprint_qc
 FINGERPRINT_VERSION = "0.1.0"
 FEATURE_VERSION = f"6B-core-{FEATURE_ENGINE_VERSION}"
 DEFAULT_NORMALIZATION = "zscore"
+DEFAULT_DISTANCE_MODE = "consensus"
+DEFAULT_CONSENSUS_GROUP_COLUMNS: tuple[str, ...] = (
+    "Strain",
+    "Chemical",
+    "Concentration",
+)
 
 FINGERPRINT_METADATA_COLUMNS: tuple[str, ...] = (
     "Fingerprint_ID",
@@ -36,6 +42,14 @@ FINGERPRINT_DATASET_COLUMNS: tuple[str, ...] = (
     *FINGERPRINT_METADATA_COLUMNS,
     *FINGERPRINT_FEATURE_COLUMNS,
 )
+CONSENSUS_METADATA_COLUMNS: tuple[str, ...] = (
+    "Consensus_ID",
+    *DEFAULT_CONSENSUS_GROUP_COLUMNS,
+    "Replicate_Count",
+    "Measurement_Unit_Count",
+    "Source_File_Count",
+    "QC_Status",
+)
 
 NormalizationMethod = Literal["none", "zscore", "minmax", "robust"]
 
@@ -44,6 +58,7 @@ def build_fingerprint_dataset(
     validation_result: FeatureValidationResult,
     *,
     normalization: NormalizationMethod | str = DEFAULT_NORMALIZATION,
+    consensus_group_columns: tuple[str, ...] | list[str] | None = None,
 ) -> FingerprintDataset:
     """Build a fingerprint matrix from a Stage 6C validation result."""
 
@@ -57,6 +72,19 @@ def build_fingerprint_dataset(
         eligible_dataframe,
         feature_names=FINGERPRINT_FEATURE_COLUMNS,
         method=normalization,
+    )
+    group_columns = tuple(consensus_group_columns or DEFAULT_CONSENSUS_GROUP_COLUMNS)
+    consensus_dataframe, consensus_summary = build_consensus_fingerprints(
+        eligible_dataframe,
+        feature_names=FINGERPRINT_FEATURE_COLUMNS,
+        group_columns=group_columns,
+    )
+    consensus_normalized_dataframe, consensus_normalization_parameters, consensus_normalization_warnings = (
+        normalize_fingerprint_dataframe(
+            consensus_dataframe,
+            feature_names=FINGERPRINT_FEATURE_COLUMNS,
+            method=normalization,
+        )
     )
 
     qc = evaluate_fingerprint_qc(
@@ -75,10 +103,16 @@ def build_fingerprint_dataset(
         qc_passed=qc.passed,
         normalization_method=normalization_parameters["method"],
         normalization_parameters=normalization_parameters,
+        consensus_dataframe=consensus_dataframe,
+        consensus_group_columns=group_columns,
     )
     warnings = [
         *qc.warnings,
         *normalization_warnings,
+        *[
+            "Consensus normalisation warning: " + warning
+            for warning in consensus_normalization_warnings
+        ],
         *[f"Input feature validation warning: {warning}" for warning in validation_result.warnings],
         *[
             "Input feature validation error retained as fingerprint exclusion context: "
@@ -94,6 +128,9 @@ def build_fingerprint_dataset(
     return FingerprintDataset(
         dataframe=eligible_dataframe.copy(deep=True),
         normalized_dataframe=normalized_dataframe.copy(deep=True),
+        consensus_dataframe=consensus_dataframe.copy(deep=True),
+        consensus_normalized_dataframe=consensus_normalized_dataframe.copy(deep=True),
+        consensus_summary=consensus_summary.copy(deep=True),
         metadata=_metadata(validation_result, normalization_parameters),
         feature_names=list(FINGERPRINT_FEATURE_COLUMNS),
         feature_version=FEATURE_VERSION,
@@ -104,8 +141,92 @@ def build_fingerprint_dataset(
         errors=errors,
         normalization_method=normalization_parameters["method"],
         normalization_parameters=normalization_parameters,
+        consensus_normalization_parameters=consensus_normalization_parameters,
+        consensus_group_columns=list(group_columns),
         excluded_dataframe=excluded_dataframe.copy(deep=True),
     )
+
+
+def build_consensus_fingerprints(
+    dataframe: pd.DataFrame,
+    *,
+    feature_names: tuple[str, ...] | list[str],
+    group_columns: tuple[str, ...] | list[str] = DEFAULT_CONSENSUS_GROUP_COLUMNS,
+) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """Aggregate individual fingerprints into deterministic consensus groups."""
+
+    feature_names = list(feature_names)
+    group_columns = list(group_columns)
+    missing_groups = [column for column in group_columns if column not in dataframe.columns]
+    if missing_groups:
+        raise ValueError(f"Missing consensus grouping columns: {', '.join(missing_groups)}")
+
+    dataset_rows: list[dict[str, Any]] = []
+    summary_rows: list[dict[str, Any]] = []
+    if dataframe.empty:
+        dataset_columns = [
+            "Consensus_ID",
+            *group_columns,
+            "Replicate_Count",
+            "Measurement_Unit_Count",
+            "Source_File_Count",
+            "QC_Status",
+            *feature_names,
+        ]
+        return pd.DataFrame(columns=dataset_columns), pd.DataFrame(columns=_consensus_summary_columns(group_columns))
+
+    grouped = dataframe.groupby(group_columns, dropna=False, sort=True)
+    for group_key, group in grouped:
+        group_values = _group_values(group_columns, group_key)
+        consensus_id = _consensus_id(group_values)
+        numeric = group.loc[:, feature_names].apply(pd.to_numeric, errors="coerce")
+        median_values = numeric.median(axis=0)
+        dataset_rows.append(
+            {
+                "Consensus_ID": consensus_id,
+                **group_values,
+                "Replicate_Count": int(len(group)),
+                "Measurement_Unit_Count": _nunique(group, "Measurement_Unit_ID"),
+                "Source_File_Count": _nunique(group, "Source_File"),
+                "QC_Status": _consensus_qc_status(group),
+                **{feature: float(median_values[feature]) for feature in feature_names},
+            }
+        )
+
+        for feature in feature_names:
+            values = pd.to_numeric(group[feature], errors="coerce").dropna().astype(float)
+            mean = float(values.mean()) if len(values) else None
+            standard_deviation = float(values.std(ddof=0)) if len(values) else None
+            summary_rows.append(
+                {
+                    "Consensus_ID": consensus_id,
+                    **group_values,
+                    "feature": feature,
+                    "median": float(values.median()) if len(values) else None,
+                    "mean": mean,
+                    "standard_deviation": standard_deviation,
+                    "coefficient_of_variation": _coefficient_of_variation(
+                        mean,
+                        standard_deviation,
+                    ),
+                    "replicate_count": int(len(group)),
+                    "finite_count": int(len(values)),
+                    "qc_status": _consensus_qc_status(group),
+                }
+            )
+
+    dataset = pd.DataFrame(dataset_rows)
+    dataset_columns = [
+        "Consensus_ID",
+        *group_columns,
+        "Replicate_Count",
+        "Measurement_Unit_Count",
+        "Source_File_Count",
+        "QC_Status",
+        *feature_names,
+    ]
+    summary = pd.DataFrame(summary_rows, columns=_consensus_summary_columns(group_columns))
+    return dataset.loc[:, dataset_columns].reset_index(drop=True), summary.reset_index(drop=True)
 
 
 def normalize_fingerprint_dataframe(
@@ -223,6 +344,8 @@ def _summary(
     qc_passed: bool,
     normalization_method: str,
     normalization_parameters: dict[str, Any],
+    consensus_dataframe: pd.DataFrame,
+    consensus_group_columns: tuple[str, ...],
 ) -> dict[str, Any]:
     feature_rows = int(validation_result.metadata.get("feature_rows", len(validation_result.validated_dataframe)))
     fingerprint_rows = int(len(fingerprint_dataframe))
@@ -240,6 +363,8 @@ def _summary(
     return {
         "feature_rows": feature_rows,
         "fingerprint_rows": fingerprint_rows,
+        "individual_fingerprint_rows": fingerprint_rows,
+        "consensus_fingerprint_rows": int(len(consensus_dataframe)),
         "excluded_rows": excluded_rows,
         "feature_columns": list(FINGERPRINT_FEATURE_COLUMNS),
         "feature_count": len(FINGERPRINT_FEATURE_COLUMNS),
@@ -252,8 +377,14 @@ def _summary(
         "normalization_zero_scale_features": list(
             normalization_parameters.get("zero_scale_features", [])
         ),
-        "distance_matrix_rows": fingerprint_rows,
-        "distance_matrix_columns": fingerprint_rows,
+        "default_distance_mode": DEFAULT_DISTANCE_MODE,
+        "consensus_group_columns": list(consensus_group_columns),
+        "distance_matrix_rows": int(len(consensus_dataframe)),
+        "distance_matrix_columns": int(len(consensus_dataframe)),
+        "individual_distance_matrix_rows": fingerprint_rows,
+        "individual_distance_matrix_columns": fingerprint_rows,
+        "consensus_distance_matrix_rows": int(len(consensus_dataframe)),
+        "consensus_distance_matrix_columns": int(len(consensus_dataframe)),
         "feature_validation_passed": bool(validation_result.validation_passed),
         "feature_validation_errors": list(validation_result.errors),
         "feature_validation_warnings": list(validation_result.warnings),
@@ -292,6 +423,64 @@ def _metadata(
         "clustering_performed": False,
         "machine_learning_performed": False,
     }
+
+
+def _consensus_summary_columns(group_columns: list[str]) -> list[str]:
+    return [
+        "Consensus_ID",
+        *group_columns,
+        "feature",
+        "median",
+        "mean",
+        "standard_deviation",
+        "coefficient_of_variation",
+        "replicate_count",
+        "finite_count",
+        "qc_status",
+    ]
+
+
+def _group_values(group_columns: list[str], group_key: Any) -> dict[str, Any]:
+    if len(group_columns) == 1:
+        values = (group_key,)
+    else:
+        values = group_key
+    return dict(zip(group_columns, values, strict=True))
+
+
+def _consensus_id(group_values: dict[str, Any]) -> str:
+    return "::".join(_stringify_group_value(value) for value in group_values.values())
+
+
+def _stringify_group_value(value: Any) -> str:
+    if pd.isna(value):
+        return "missing"
+    return str(value)
+
+
+def _nunique(dataframe: pd.DataFrame, column: str) -> int:
+    if column not in dataframe.columns:
+        return 0
+    return int(dataframe[column].dropna().astype("string").nunique())
+
+
+def _consensus_qc_status(group: pd.DataFrame) -> str:
+    if "QC_Status" not in group.columns:
+        return "unknown"
+    statuses = set(group["QC_Status"].dropna().astype(str))
+    if "fail" in statuses:
+        return "fail"
+    if "warning" in statuses:
+        return "warning"
+    if "pass" in statuses:
+        return "pass"
+    return "unknown"
+
+
+def _coefficient_of_variation(mean: float | None, standard_deviation: float | None) -> float | None:
+    if mean is None or standard_deviation is None or mean == 0:
+        return None
+    return float(standard_deviation / abs(mean))
 
 
 def _canonical_normalization_method(method: NormalizationMethod | str) -> str:

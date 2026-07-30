@@ -12,6 +12,8 @@ import pandas as pd
 
 
 DistanceMetric = Literal["euclidean", "manhattan", "cosine", "correlation"]
+DEFAULT_CSV_BYTES_PER_CELL = 24
+DEFAULT_LABEL_BYTES_PER_ROW = 128
 
 
 def euclidean_distance(vector_a: Iterable[float], vector_b: Iterable[float]) -> float:
@@ -92,6 +94,33 @@ def write_distance_matrix_csv(
             for row_label, row_values in zip(labels[start:end], chunk, strict=True):
                 writer.writerow([row_label, *(_format_distance(value) for value in row_values)])
     return int(len(values)), int(len(values))
+
+
+def estimate_distance_matrix_size(
+    row_count: int,
+    *,
+    csv_bytes_per_cell: int = DEFAULT_CSV_BYTES_PER_CELL,
+    label_bytes_per_row: int = DEFAULT_LABEL_BYTES_PER_ROW,
+) -> dict[str, int]:
+    """Estimate square distance-matrix size before calculation."""
+
+    rows = int(row_count)
+    if rows < 0:
+        raise ValueError("row_count must be non-negative.")
+    cells = rows * rows
+    estimated_memory_bytes = cells * 8
+    estimated_csv_bytes = (
+        cells * int(csv_bytes_per_cell)
+        + rows * int(label_bytes_per_row) * 2
+        + max(rows, 1) * 2
+    )
+    return {
+        "rows": rows,
+        "columns": rows,
+        "cells": cells,
+        "estimated_memory_bytes": int(estimated_memory_bytes),
+        "estimated_csv_bytes": int(estimated_csv_bytes),
+    }
 
 
 def _distance_chunk(

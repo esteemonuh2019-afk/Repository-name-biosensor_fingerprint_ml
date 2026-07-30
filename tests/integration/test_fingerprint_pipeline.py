@@ -18,11 +18,13 @@ def test_canonical_to_validated_features_to_fingerprint_dataset() -> None:
                 [(0, 12), (5, 21), (10, 16)],
                 measurement_unit_id="unit-2",
                 replicate_id="2",
+                concentration="10 ug/mL",
             ),
             _canonical_dataframe(
                 [(0, 8), (5, 14), (10, 13)],
                 measurement_unit_id="unit-3",
                 replicate_id="3",
+                strain="BL032",
             ),
         ],
         ignore_index=True,
@@ -37,6 +39,7 @@ def test_canonical_to_validated_features_to_fingerprint_dataset() -> None:
     assert fingerprint_dataset.metadata["feature_validation_bypassed"] is False
     assert fingerprint_dataset.summary["feature_rows"] == 3
     assert fingerprint_dataset.summary["fingerprint_rows"] == 3
+    assert fingerprint_dataset.summary["consensus_fingerprint_rows"] == 3
     assert fingerprint_dataset.summary["excluded_rows"] == 0
     assert fingerprint_dataset.summary["distance_matrix_rows"] == 3
     assert fingerprint_dataset.feature_names == list(validation_result.metadata["feature_columns"])
@@ -48,6 +51,15 @@ def test_canonical_to_validated_features_to_fingerprint_dataset() -> None:
         "unit-3",
     ]
     assert fingerprint_dataset.normalized_dataframe.shape == fingerprint_dataset.dataframe.shape
+    assert len(fingerprint_dataset.consensus_dataframe) == 3
+    assert "distance_matrix_euclidean.csv" not in {
+        output["filename"]
+        for output in fingerprint_dataset.distance_output_plan(distance_mode="consensus")
+    }
+    assert "consensus_distance_matrix_euclidean.csv" in {
+        output["filename"]
+        for output in fingerprint_dataset.distance_output_plan(distance_mode="consensus")
+    }
 
 
 def _canonical_dataframe(
@@ -55,6 +67,8 @@ def _canonical_dataframe(
     *,
     measurement_unit_id: str,
     replicate_id: str,
+    strain: str = "BL011",
+    concentration: str = "5 ug/mL",
 ) -> pd.DataFrame:
     rows = []
     for index, (time_minutes, luminescence) in enumerate(points, start=1):
@@ -72,11 +86,11 @@ def _canonical_dataframe(
                 "Import_Timestamp": pd.NaT,
                 "Source_Row_ID": index,
                 "Measurement_Unit_ID": measurement_unit_id,
-                "Strain_Original": "BL011",
+                "Strain_Original": strain,
                 "Strain_Standardized": pd.NA,
                 "Chemical_Name_Original": "Diazinon",
                 "Chemical_Name_Standardized": pd.NA,
-                "Concentration_Label": "5 ug/mL",
+                "Concentration_Label": concentration,
                 "Concentration_ug_mL": 5.0,
                 "Control_Status": "treatment",
                 "Control_Type": pd.NA,

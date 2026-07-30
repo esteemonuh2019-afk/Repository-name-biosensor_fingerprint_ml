@@ -28,3 +28,6 @@ outputs/
 .pytest_tmp_*/
 __pycache__/
 *.pyc
+
+# Trained model artefacts
+models/
