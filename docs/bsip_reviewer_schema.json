@@ -1,0 +1,240 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "BSIP v4.1.0 Reviewer Engine Output",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "software_version",
+    "review_rule_version",
+    "generated_at",
+    "review_findings",
+    "summary",
+    "validation_summary",
+    "publication_assessment"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "BSIP-4.1.0"
+    },
+    "software_version": {
+      "type": "string"
+    },
+    "review_rule_version": {
+      "const": "BSIP-REVIEW-RULES-4.1.0"
+    },
+    "generated_at": {
+      "type": "string"
+    },
+    "review_findings": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/review_finding"
+      }
+    },
+    "summary": {
+      "type": "object"
+    },
+    "validation_summary": {
+      "type": "object"
+    },
+    "publication_assessment": {
+      "type": "object"
+    }
+  },
+  "$defs": {
+    "review_finding": {
+      "type": "object",
+      "required": [
+        "finding_id",
+        "reviewer_type",
+        "category",
+        "title",
+        "finding_text",
+        "severity",
+        "blocking",
+        "confidence",
+        "affected_claim_ids",
+        "affected_hypothesis_ids",
+        "affected_interpretation_ids",
+        "affected_observation_ids",
+        "affected_figure_ids",
+        "affected_table_ids",
+        "evidence_score_ids",
+        "reasoning_graph_node_ids",
+        "source_validation_ids",
+        "rationale",
+        "evidence_summary",
+        "publication_risk",
+        "revision_requirement",
+        "limitations",
+        "rule_ids",
+        "created_at",
+        "software_version",
+        "tags",
+        "metadata"
+      ],
+      "properties": {
+        "finding_id": {
+          "type": "string",
+          "pattern": "^REV-[A-Z_]+-[0-9]{4}$"
+        },
+        "reviewer_type": {
+          "enum": [
+            "SCIENTIFIC",
+            "STATISTICAL",
+            "EVIDENCE",
+            "VALIDATION",
+            "REPRODUCIBILITY",
+            "FIGURE",
+            "WRITING",
+            "PUBLICATION"
+          ]
+        },
+        "category": {
+          "enum": [
+            "CLAIM_SUPPORT",
+            "GENERALIZATION",
+            "DATA_QUALITY",
+            "STATISTICAL_INTERPRETATION",
+            "COMPETING_EXPLANATIONS",
+            "EXTERNAL_VALIDATION",
+            "TRACEABILITY",
+            "REPRODUCIBILITY",
+            "FIGURE_SUPPORT",
+            "TABLE_SUPPORT",
+            "LANGUAGE_STRENGTH",
+            "PUBLICATION_READINESS",
+            "LIMITATION_COMPLETENESS",
+            "MISSING_EVIDENCE"
+          ]
+        },
+        "severity": {
+          "enum": [
+            "CRITICAL",
+            "MAJOR",
+            "MODERATE",
+            "MINOR",
+            "INFORMATION"
+          ]
+        },
+        "blocking": {
+          "type": "boolean"
+        },
+        "confidence": {
+          "enum": [
+            "HIGH",
+            "MODERATE",
+            "GUARDED",
+            "LOW"
+          ]
+        },
+        "publication_risk": {
+          "enum": [
+            "BLOCKING",
+            "HIGH",
+            "MODERATE",
+            "LOW",
+            "NONE"
+          ]
+        },
+        "affected_claim_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "affected_hypothesis_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "affected_interpretation_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "affected_observation_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "affected_figure_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "affected_table_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "evidence_score_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "reasoning_graph_node_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "source_validation_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "title": {
+          "type": "string"
+        },
+        "finding_text": {
+          "type": "string"
+        },
+        "rationale": {
+          "type": "string"
+        },
+        "evidence_summary": {
+          "type": "string"
+        },
+        "revision_requirement": {
+          "type": "string"
+        },
+        "limitations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "rule_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "created_at": {
+          "type": "string"
+        },
+        "software_version": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "metadata": {
+          "type": "object"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}
