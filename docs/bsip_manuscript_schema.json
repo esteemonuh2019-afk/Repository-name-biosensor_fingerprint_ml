@@ -1,0 +1,107 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "BSIP v4.2.0 Manuscript Engine Summary",
+  "type": "object",
+  "required": [
+    "manuscript_id",
+    "document_status",
+    "manuscript_drafting_allowed",
+    "overall_reviewer_recommendation",
+    "section_count",
+    "paragraph_count",
+    "sentence_count",
+    "figure_caption_count",
+    "table_caption_count",
+    "validation_passed",
+    "schema_version",
+    "software_version"
+  ],
+  "properties": {
+    "manuscript_id": {
+      "type": "string"
+    },
+    "document_status": {
+      "enum": [
+        "INTERNAL_DRAFT",
+        "SUPERVISOR_REVIEW_DRAFT",
+        "REVISION_REQUIRED",
+        "NOT_GENERATED"
+      ]
+    },
+    "manuscript_drafting_allowed": {
+      "type": "boolean"
+    },
+    "overall_reviewer_recommendation": {
+      "type": "string"
+    },
+    "section_count": {
+      "type": "integer"
+    },
+    "paragraph_count": {
+      "type": "integer"
+    },
+    "sentence_count": {
+      "type": "integer"
+    },
+    "quantitative_sentence_count": {
+      "type": "integer"
+    },
+    "interpretive_sentence_count": {
+      "type": "integer"
+    },
+    "limitation_sentence_count": {
+      "type": "integer"
+    },
+    "conclusion_sentence_count": {
+      "type": "integer"
+    },
+    "figure_caption_count": {
+      "type": "integer"
+    },
+    "table_caption_count": {
+      "type": "integer"
+    },
+    "fully_traceable_sentence_count": {
+      "type": "integer"
+    },
+    "partially_traceable_sentence_count": {
+      "type": "integer"
+    },
+    "withheld_sentence_count": {
+      "type": "integer"
+    },
+    "unresolved_revision_flag_count": {
+      "type": "integer"
+    },
+    "blocking_reviewer_finding_count": {
+      "type": "integer"
+    },
+    "source_observation_count": {
+      "type": "integer"
+    },
+    "source_interpretation_count": {
+      "type": "integer"
+    },
+    "source_hypothesis_count": {
+      "type": "integer"
+    },
+    "source_claim_count": {
+      "type": "integer"
+    },
+    "source_evidence_score_count": {
+      "type": "integer"
+    },
+    "source_reviewer_finding_count": {
+      "type": "integer"
+    },
+    "validation_passed": {
+      "type": "boolean"
+    },
+    "schema_version": {
+      "const": "BSIP-4.2.0"
+    },
+    "software_version": {
+      "const": "BSIP-4.2.0-manuscript-engine"
+    }
+  }
+}
