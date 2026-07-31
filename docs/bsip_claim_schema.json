@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bsip.local/schemas/bsip_claim_schema.json",
+  "title": "BSIP v3.2.0 Scientific Claim",
+  "type": "object",
+  "required": [
+    "claim_id",
+    "category",
+    "title",
+    "claim_text",
+    "claim_type",
+    "claim_status",
+    "evidence_strength",
+    "publication_use",
+    "supporting_hypothesis_ids",
+    "competing_hypothesis_ids",
+    "supporting_interpretation_ids",
+    "supporting_observation_ids",
+    "evidence_gap_ids",
+    "validation_summary_ids",
+    "reasoning_graph_node_ids",
+    "assumptions",
+    "limitations",
+    "rationale",
+    "evidence_score",
+    "confidence_label",
+    "language_policy_rule_ids",
+    "reasoning_rule_ids",
+    "created_at",
+    "software_version",
+    "source_hypothesis_schema_version",
+    "source_graph_schema_version",
+    "tags",
+    "metadata"
+  ],
+  "properties": {
+    "claim_id": {"type": "string", "pattern": "^CLM-[A-Z_]+-[0-9]{4}$"},
+    "category": {
+      "type": "string",
+      "enum": [
+        "CHEMICAL_DISCRIMINATION",
+        "CONCENTRATION_INFORMATION",
+        "TEMPORAL_INFORMATION",
+        "FEATURE_REPRESENTATION",
+        "STRAIN_CONTRIBUTION",
+        "DATA_QUALITY",
+        "GENERALIZATION",
+        "SYSTEM_LEVEL_PERFORMANCE"
+      ]
+    },
+    "title": {"type": "string"},
+    "claim_text": {"type": "string"},
+    "claim_type": {
+      "type": "string",
+      "enum": ["PRIMARY_FINDING", "SUPPORTING_FINDING", "CONTEXTUAL_FINDING", "LIMITATION", "WITHHELD"]
+    },
+    "claim_status": {
+      "type": "string",
+      "enum": ["SUPPORTED", "PARTIALLY_SUPPORTED", "TENTATIVE", "CONFLICTED", "WITHHELD", "NOT_ASSESSABLE"]
+    },
+    "evidence_strength": {
+      "type": "string",
+      "enum": ["STRONG", "MODERATE", "LIMITED", "INSUFFICIENT", "NOT_ASSESSABLE"]
+    },
+    "publication_use": {
+      "type": "string",
+      "enum": ["RESULTS_ELIGIBLE", "DISCUSSION_ELIGIBLE", "LIMITATION_ONLY", "INTERNAL_REVIEW_ONLY", "NOT_ELIGIBLE"]
+    },
+    "supporting_hypothesis_ids": {"type": "array", "items": {"type": "string"}},
+    "competing_hypothesis_ids": {"type": "array", "items": {"type": "string"}},
+    "supporting_interpretation_ids": {"type": "array", "items": {"type": "string"}},
+    "supporting_observation_ids": {"type": "array", "items": {"type": "string"}},
+    "evidence_gap_ids": {"type": "array", "items": {"type": "string"}},
+    "validation_summary_ids": {"type": "array", "items": {"type": "string"}},
+    "reasoning_graph_node_ids": {"type": "array", "items": {"type": "string"}},
+    "assumptions": {"type": "array", "items": {"type": "string"}},
+    "limitations": {"type": "array", "items": {"type": "string"}},
+    "rationale": {"type": "string"},
+    "evidence_score": {"type": "number", "minimum": 0, "maximum": 100},
+    "confidence_label": {"type": "string", "enum": ["HIGH", "MODERATE", "LOW", "NOT_ASSESSABLE"]},
+    "language_policy_rule_ids": {"type": "array", "items": {"type": "string"}},
+    "reasoning_rule_ids": {"type": "array", "items": {"type": "string"}},
+    "created_at": {"type": "string"},
+    "software_version": {"type": "string"},
+    "source_hypothesis_schema_version": {"type": ["string", "null"]},
+    "source_graph_schema_version": {"type": ["string", "null"]},
+    "tags": {"type": "array", "items": {"type": "string"}},
+    "metadata": {"type": "object"}
+  },
+  "additionalProperties": false
+}
