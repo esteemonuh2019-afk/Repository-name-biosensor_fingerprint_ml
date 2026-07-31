@@ -1,0 +1,279 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bsip.local/schemas/bsip_observation_schema.json",
+  "title": "BSIP 2.0 Scientific Observation",
+  "type": "object",
+  "required": [
+    "observation_id",
+    "category",
+    "title",
+    "statement",
+    "status",
+    "analysis_stage",
+    "supporting_metrics",
+    "supporting_files",
+    "provenance_records",
+    "confidence",
+    "limitations",
+    "created_at",
+    "software_version",
+    "source_run",
+    "tags",
+    "metadata"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "observation_id": {
+      "type": "string",
+      "pattern": "^OBS-(DATASET|QC|FINGERPRINT|EXPLORATORY_ANALYSIS|CLASSIFICATION|REGRESSION|FEATURE_ENGINEERING|FEATURE_SELECTION|STRAIN_CONTRIBUTION|BLIND_PREDICTION|VALIDATION)-[0-9]{4}$"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "DATASET",
+        "QUALITY_CONTROL",
+        "FINGERPRINT",
+        "EXPLORATORY_ANALYSIS",
+        "CLASSIFICATION",
+        "REGRESSION",
+        "FEATURE_ENGINEERING",
+        "FEATURE_SELECTION",
+        "STRAIN_CONTRIBUTION",
+        "BLIND_PREDICTION",
+        "VALIDATION"
+      ]
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "statement": {
+      "type": "string",
+      "minLength": 1
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "COMPLETE",
+        "INCOMPLETE",
+        "ACTIVE",
+        "FAILED",
+        "NOT_ASSESSABLE"
+      ]
+    },
+    "analysis_stage": {
+      "type": "string",
+      "minLength": 1
+    },
+    "supporting_metrics": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/supporting_metric"
+      }
+    },
+    "supporting_files": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "provenance_records": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/provenance_record"
+      }
+    },
+    "confidence": {
+      "type": "string",
+      "enum": [
+        "HIGH",
+        "MODERATE",
+        "LOW",
+        "NOT_ASSESSABLE"
+      ]
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "software_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_run": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "metadata": {
+      "type": "object"
+    }
+  },
+  "$defs": {
+    "metric_value": {
+      "type": [
+        "number",
+        "string",
+        "boolean",
+        "null"
+      ]
+    },
+    "supporting_metric": {
+      "type": "object",
+      "required": [
+        "metric_name",
+        "metric_value",
+        "units",
+        "model_name",
+        "fold_count",
+        "sample_count",
+        "source_file",
+        "source_run",
+        "provenance_id"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "metric_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "metric_value": {
+          "$ref": "#/$defs/metric_value"
+        },
+        "units": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "model_name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "fold_count": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "sample_count": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "source_file": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "source_run": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "provenance_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "provenance_record": {
+      "type": "object",
+      "required": [
+        "provenance_id",
+        "source_file",
+        "source_run",
+        "section",
+        "claim_text",
+        "metric_name",
+        "metric_value",
+        "units",
+        "model_name",
+        "table_or_figure_reference",
+        "support_status"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "provenance_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_file": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "source_run": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "section": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "claim_text": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "metric_name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "metric_value": {
+          "$ref": "#/$defs/metric_value"
+        },
+        "units": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "model_name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "table_or_figure_reference": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "support_status": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}
