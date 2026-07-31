@@ -1,0 +1,478 @@
+{
+  "generated_at": "2026-07-31T00:00:00+00:00",
+  "interpretations": [
+    {
+      "assumptions": [
+        "Synthetic interpretation fixture."
+      ],
+      "category": "BLIND_VALIDATION",
+      "claim": "The available blind-prediction observations do not establish external validation performance because true labels were absent.",
+      "confidence": "MODERATE",
+      "contradicting_observation_ids": [],
+      "created_at": "2026-07-31T00:00:00+00:00",
+      "evidence_summary": [
+        {
+          "direction": "SUPPORTING",
+          "metric_names": [
+            "synthetic_metric"
+          ],
+          "observation_id": "OBS-BLIND_PREDICTION-0001",
+          "provenance_ids": [
+            "P-OBS-BLIND_PREDICTION-0001"
+          ],
+          "rationale": "Synthetic interpretation evidence link.",
+          "source_files": [
+            "observations/OBS-BLIND_PREDICTION-0001.json"
+          ]
+        }
+      ],
+      "interpretation_id": "INT-BLIND_VALIDATION-0001",
+      "limitations": [],
+      "metadata": {
+        "fixture": true
+      },
+      "reasoning_rule_ids": [
+        "RULE-BLIND_VALIDATION-001"
+      ],
+      "software_version": "BSIP-2.1.0-test",
+      "source_observation_schema_version": "BSIP-2.0",
+      "status": "PARTIALLY_SUPPORTED",
+      "supporting_observation_ids": [
+        "OBS-BLIND_PREDICTION-0001"
+      ],
+      "tags": [
+        "synthetic"
+      ],
+      "title": "Blind-validation boundary"
+    },
+    {
+      "assumptions": [
+        "Synthetic interpretation fixture."
+      ],
+      "category": "CHEMICAL_CLASSIFICATION",
+      "claim": "The classification observations suggest chemical-class discrimination information.",
+      "confidence": "MODERATE",
+      "contradicting_observation_ids": [],
+      "created_at": "2026-07-31T00:00:00+00:00",
+      "evidence_summary": [
+        {
+          "direction": "SUPPORTING",
+          "metric_names": [
+            "synthetic_metric"
+          ],
+          "observation_id": "OBS-CLASSIFICATION-0001",
+          "provenance_ids": [
+            "P-OBS-CLASSIFICATION-0001"
+          ],
+          "rationale": "Synthetic interpretation evidence link.",
+          "source_files": [
+            "observations/OBS-CLASSIFICATION-0001.json"
+          ]
+        }
+      ],
+      "interpretation_id": "INT-CHEMICAL_CLASSIFICATION-0001",
+      "limitations": [],
+      "metadata": {
+        "fixture": true
+      },
+      "reasoning_rule_ids": [
+        "RULE-CHEMICAL_CLASSIFICATION-001"
+      ],
+      "software_version": "BSIP-2.1.0-test",
+      "source_observation_schema_version": "BSIP-2.0",
+      "status": "SUPPORTED",
+      "supporting_observation_ids": [
+        "OBS-CLASSIFICATION-0001"
+      ],
+      "tags": [
+        "synthetic"
+      ],
+      "title": "Chemical classification"
+    },
+    {
+      "assumptions": [
+        "Synthetic interpretation fixture."
+      ],
+      "category": "CONCENTRATION_REGRESSION",
+      "claim": "The regression observations indicate concentration-related information is present.",
+      "confidence": "MODERATE",
+      "contradicting_observation_ids": [],
+      "created_at": "2026-07-31T00:00:00+00:00",
+      "evidence_summary": [
+        {
+          "direction": "SUPPORTING",
+          "metric_names": [
+            "synthetic_metric"
+          ],
+          "observation_id": "OBS-REGRESSION-0001",
+          "provenance_ids": [
+            "P-OBS-REGRESSION-0001"
+          ],
+          "rationale": "Synthetic interpretation evidence link.",
+          "source_files": [
+            "observations/OBS-REGRESSION-0001.json"
+          ]
+        }
+      ],
+      "interpretation_id": "INT-CONCENTRATION_REGRESSION-0001",
+      "limitations": [],
+      "metadata": {
+        "fixture": true
+      },
+      "reasoning_rule_ids": [
+        "RULE-CONCENTRATION_REGRESSION-001"
+      ],
+      "software_version": "BSIP-2.1.0-test",
+      "source_observation_schema_version": "BSIP-2.0",
+      "status": "SUPPORTED",
+      "supporting_observation_ids": [
+        "OBS-REGRESSION-0001"
+      ],
+      "tags": [
+        "synthetic"
+      ],
+      "title": "Concentration regression"
+    },
+    {
+      "assumptions": [
+        "Synthetic interpretation fixture."
+      ],
+      "category": "DATA_QUALITY",
+      "claim": "The quality-control observations indicate active data-quality limitations.",
+      "confidence": "HIGH",
+      "contradicting_observation_ids": [],
+      "created_at": "2026-07-31T00:00:00+00:00",
+      "evidence_summary": [
+        {
+          "direction": "SUPPORTING",
+          "metric_names": [
+            "synthetic_metric"
+          ],
+          "observation_id": "OBS-QC-0001",
+          "provenance_ids": [
+            "P-OBS-QC-0001"
+          ],
+          "rationale": "Synthetic interpretation evidence link.",
+          "source_files": [
+            "observations/OBS-QC-0001.json"
+          ]
+        },
+        {
+          "direction": "SUPPORTING",
+          "metric_names": [
+            "synthetic_metric"
+          ],
+          "observation_id": "OBS-VALIDATION-0001",
+          "provenance_ids": [
+            "P-OBS-VALIDATION-0001"
+          ],
+          "rationale": "Synthetic interpretation evidence link.",
+          "source_files": [
+            "observations/OBS-VALIDATION-0001.json"
+          ]
+        }
+      ],
+      "interpretation_id": "INT-DATA_QUALITY-0001",
+      "limitations": [],
+      "metadata": {
+        "fixture": true
+      },
+      "reasoning_rule_ids": [
+        "RULE-DATA_QUALITY-001"
+      ],
+      "software_version": "BSIP-2.1.0-test",
+      "source_observation_schema_version": "BSIP-2.0",
+      "status": "SUPPORTED",
+      "supporting_observation_ids": [
+        "OBS-QC-0001",
+        "OBS-VALIDATION-0001"
+      ],
+      "tags": [
+        "synthetic"
+      ],
+      "title": "Data quality"
+    },
+    {
+      "assumptions": [
+        "Synthetic interpretation fixture."
+      ],
+      "category": "FEATURE_ENGINEERING",
+      "claim": "The feature-engineering observations indicate temporal feature associations.",
+      "confidence": "MODERATE",
+      "contradicting_observation_ids": [],
+      "created_at": "2026-07-31T00:00:00+00:00",
+      "evidence_summary": [
+        {
+          "direction": "SUPPORTING",
+          "metric_names": [
+            "synthetic_metric"
+          ],
+          "observation_id": "OBS-FEATURE_ENGINEERING-0001",
+          "provenance_ids": [
+            "P-OBS-FEATURE_ENGINEERING-0001"
+          ],
+          "rationale": "Synthetic interpretation evidence link.",
+          "source_files": [
+            "observations/OBS-FEATURE_ENGINEERING-0001.json"
+          ]
+        }
+      ],
+      "interpretation_id": "INT-FEATURE_ENGINEERING-0001",
+      "limitations": [],
+      "metadata": {
+        "fixture": true
+      },
+      "reasoning_rule_ids": [
+        "RULE-FEATURE_ENGINEERING-001"
+      ],
+      "software_version": "BSIP-2.1.0-test",
+      "source_observation_schema_version": "BSIP-2.0",
+      "status": "SUPPORTED",
+      "supporting_observation_ids": [
+        "OBS-FEATURE_ENGINEERING-0001"
+      ],
+      "tags": [
+        "synthetic"
+      ],
+      "title": "Feature engineering"
+    },
+    {
+      "assumptions": [
+        "Synthetic interpretation fixture."
+      ],
+      "category": "FEATURE_SELECTION",
+      "claim": "The feature-selection outputs document selected feature sets.",
+      "confidence": "MODERATE",
+      "contradicting_observation_ids": [],
+      "created_at": "2026-07-31T00:00:00+00:00",
+      "evidence_summary": [
+        {
+          "direction": "SUPPORTING",
+          "metric_names": [
+            "synthetic_metric"
+          ],
+          "observation_id": "OBS-FEATURE_SELECTION-0001",
+          "provenance_ids": [
+            "P-OBS-FEATURE_SELECTION-0001"
+          ],
+          "rationale": "Synthetic interpretation evidence link.",
+          "source_files": [
+            "observations/OBS-FEATURE_SELECTION-0001.json"
+          ]
+        }
+      ],
+      "interpretation_id": "INT-FEATURE_SELECTION-0001",
+      "limitations": [],
+      "metadata": {
+        "fixture": true
+      },
+      "reasoning_rule_ids": [
+        "RULE-FEATURE_SELECTION-001"
+      ],
+      "software_version": "BSIP-2.1.0-test",
+      "source_observation_schema_version": "BSIP-2.0",
+      "status": "SUPPORTED",
+      "supporting_observation_ids": [
+        "OBS-FEATURE_SELECTION-0001"
+      ],
+      "tags": [
+        "synthetic"
+      ],
+      "title": "Feature selection"
+    },
+    {
+      "assumptions": [
+        "Synthetic interpretation fixture."
+      ],
+      "category": "FINGERPRINT_STRUCTURE",
+      "claim": "The fingerprint and exploratory observations indicate structured variation.",
+      "confidence": "HIGH",
+      "contradicting_observation_ids": [],
+      "created_at": "2026-07-31T00:00:00+00:00",
+      "evidence_summary": [
+        {
+          "direction": "SUPPORTING",
+          "metric_names": [
+            "synthetic_metric"
+          ],
+          "observation_id": "OBS-FINGERPRINT-0001",
+          "provenance_ids": [
+            "P-OBS-FINGERPRINT-0001"
+          ],
+          "rationale": "Synthetic interpretation evidence link.",
+          "source_files": [
+            "observations/OBS-FINGERPRINT-0001.json"
+          ]
+        },
+        {
+          "direction": "SUPPORTING",
+          "metric_names": [
+            "synthetic_metric"
+          ],
+          "observation_id": "OBS-EXPLORATORY_ANALYSIS-0001",
+          "provenance_ids": [
+            "P-OBS-EXPLORATORY_ANALYSIS-0001"
+          ],
+          "rationale": "Synthetic interpretation evidence link.",
+          "source_files": [
+            "observations/OBS-EXPLORATORY_ANALYSIS-0001.json"
+          ]
+        }
+      ],
+      "interpretation_id": "INT-FINGERPRINT_STRUCTURE-0001",
+      "limitations": [],
+      "metadata": {
+        "fixture": true
+      },
+      "reasoning_rule_ids": [
+        "RULE-FINGERPRINT_STRUCTURE-001"
+      ],
+      "software_version": "BSIP-2.1.0-test",
+      "source_observation_schema_version": "BSIP-2.0",
+      "status": "SUPPORTED",
+      "supporting_observation_ids": [
+        "OBS-EXPLORATORY_ANALYSIS-0001",
+        "OBS-FINGERPRINT-0001"
+      ],
+      "tags": [
+        "synthetic"
+      ],
+      "title": "Fingerprint structure"
+    },
+    {
+      "assumptions": [
+        "Synthetic interpretation fixture."
+      ],
+      "category": "OVERALL_EVIDENCE",
+      "claim": "The available evidence supports further evaluation under current limitations.",
+      "confidence": "MODERATE",
+      "contradicting_observation_ids": [],
+      "created_at": "2026-07-31T00:00:00+00:00",
+      "evidence_summary": [
+        {
+          "direction": "SUPPORTING",
+          "metric_names": [
+            "synthetic_metric"
+          ],
+          "observation_id": "OBS-BLIND_PREDICTION-0001",
+          "provenance_ids": [
+            "P-OBS-BLIND_PREDICTION-0001"
+          ],
+          "rationale": "Synthetic interpretation evidence link.",
+          "source_files": [
+            "observations/OBS-BLIND_PREDICTION-0001.json"
+          ]
+        },
+        {
+          "direction": "SUPPORTING",
+          "metric_names": [
+            "synthetic_metric"
+          ],
+          "observation_id": "OBS-CLASSIFICATION-0001",
+          "provenance_ids": [
+            "P-OBS-CLASSIFICATION-0001"
+          ],
+          "rationale": "Synthetic interpretation evidence link.",
+          "source_files": [
+            "observations/OBS-CLASSIFICATION-0001.json"
+          ]
+        },
+        {
+          "direction": "SUPPORTING",
+          "metric_names": [
+            "synthetic_metric"
+          ],
+          "observation_id": "OBS-QC-0001",
+          "provenance_ids": [
+            "P-OBS-QC-0001"
+          ],
+          "rationale": "Synthetic interpretation evidence link.",
+          "source_files": [
+            "observations/OBS-QC-0001.json"
+          ]
+        },
+        {
+          "direction": "SUPPORTING",
+          "metric_names": [
+            "synthetic_metric"
+          ],
+          "observation_id": "OBS-REGRESSION-0001",
+          "provenance_ids": [
+            "P-OBS-REGRESSION-0001"
+          ],
+          "rationale": "Synthetic interpretation evidence link.",
+          "source_files": [
+            "observations/OBS-REGRESSION-0001.json"
+          ]
+        }
+      ],
+      "interpretation_id": "INT-OVERALL_EVIDENCE-0001",
+      "limitations": [],
+      "metadata": {
+        "fixture": true
+      },
+      "reasoning_rule_ids": [
+        "RULE-OVERALL_EVIDENCE-001"
+      ],
+      "software_version": "BSIP-2.1.0-test",
+      "source_observation_schema_version": "BSIP-2.0",
+      "status": "SUPPORTED",
+      "supporting_observation_ids": [
+        "OBS-BLIND_PREDICTION-0001",
+        "OBS-CLASSIFICATION-0001",
+        "OBS-QC-0001",
+        "OBS-REGRESSION-0001"
+      ],
+      "tags": [
+        "synthetic"
+      ],
+      "title": "Overall evidence"
+    },
+    {
+      "assumptions": [
+        "Synthetic interpretation fixture."
+      ],
+      "category": "STRAIN_CONTRIBUTION",
+      "claim": "The strain-contribution outputs indicate differential contribution was evaluated.",
+      "confidence": "MODERATE",
+      "contradicting_observation_ids": [],
+      "created_at": "2026-07-31T00:00:00+00:00",
+      "evidence_summary": [
+        {
+          "direction": "SUPPORTING",
+          "metric_names": [
+            "synthetic_metric"
+          ],
+          "observation_id": "OBS-STRAIN_CONTRIBUTION-0001",
+          "provenance_ids": [
+            "P-OBS-STRAIN_CONTRIBUTION-0001"
+          ],
+          "rationale": "Synthetic interpretation evidence link.",
+          "source_files": [
+            "observations/OBS-STRAIN_CONTRIBUTION-0001.json"
+          ]
+        }
+      ],
+      "interpretation_id": "INT-STRAIN_CONTRIBUTION-0001",
+      "limitations": [],
+      "metadata": {
+        "fixture": true
+      },
+      "reasoning_rule_ids": [
+        "RULE-STRAIN_CONTRIBUTION-001"
+      ],
+      "software_version": "BSIP-2.1.0-test",
+      "source_observation_schema_version": "BSIP-2.0",
+      "status": "SUPPORTED",
+      "supporting_observation_ids": [
+        "OBS-STRAIN_CONTRIBUTION-0001"
+      ],
+      "tags": [
+        "synthetic"
+      ],
+      "title": "Strain contribution"
+    }
+  ],
+  "schema_version": "BSIP-2.1.0",
+  "software_version": "BSIP-2.1.0-test"
+}

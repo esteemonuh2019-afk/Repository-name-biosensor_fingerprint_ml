@@ -1,0 +1,45 @@
+{
+  "competing_count": 4,
+  "conflicted_count": 0,
+  "count_by_category": {
+    "CHEMICAL_DISCRIMINATION": 2,
+    "CONCENTRATION_ENCODING": 2,
+    "DATA_QUALITY_EFFECT": 1,
+    "FEATURE_REPRESENTATION": 2,
+    "GENERALIZATION": 1,
+    "OVERALL_SYSTEM_BEHAVIOR": 1,
+    "STRAIN_CONTRIBUTION": 2,
+    "TEMPORAL_INFORMATION": 1
+  },
+  "count_by_confidence": {
+    "LOW": 3,
+    "MODERATE": 9
+  },
+  "count_by_priority": {
+    "HIGH": 3,
+    "LOW": 2,
+    "MEDIUM": 7
+  },
+  "count_by_status": {
+    "COMPETING": 4,
+    "PLAUSIBLE": 6,
+    "WEAKLY_SUPPORTED": 2
+  },
+  "insufficient_evidence_count": 0,
+  "plausible_count": 6,
+  "source_interpretations_loaded": [
+    "INT-BLIND_VALIDATION-0001",
+    "INT-CHEMICAL_CLASSIFICATION-0001",
+    "INT-CONCENTRATION_REGRESSION-0001",
+    "INT-DATA_QUALITY-0001",
+    "INT-FEATURE_ENGINEERING-0001",
+    "INT-FEATURE_SELECTION-0001",
+    "INT-FINGERPRINT_STRUCTURE-0001",
+    "INT-OVERALL_EVIDENCE-0001",
+    "INT-STRAIN_CONTRIBUTION-0001"
+  ],
+  "source_interpretations_missing": [],
+  "total_hypotheses": 12,
+  "validation_passed": true,
+  "weakly_supported_count": 2
+}

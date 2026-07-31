@@ -1,0 +1,177 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bsip.local/schema/bsip_hypothesis_v2_2_0.json",
+  "title": "BSIP 2.2.0 Scientific Hypothesis",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "hypothesis_id",
+    "category",
+    "title",
+    "statement",
+    "status",
+    "confidence",
+    "supporting_interpretation_ids",
+    "contradicting_interpretation_ids",
+    "supporting_observation_ids",
+    "assumptions",
+    "alternative_hypothesis_ids",
+    "evidence_gaps",
+    "falsifiability_statement",
+    "rationale",
+    "reasoning_rule_ids",
+    "priority_score",
+    "priority",
+    "created_at",
+    "software_version",
+    "source_interpretation_schema_version",
+    "tags",
+    "metadata"
+  ],
+  "properties": {
+    "hypothesis_id": {
+      "type": "string",
+      "pattern": "^HYP-[A-Z_]+-[0-9]{4}$"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "TEMPORAL_INFORMATION",
+        "CHEMICAL_DISCRIMINATION",
+        "CONCENTRATION_ENCODING",
+        "FEATURE_REPRESENTATION",
+        "STRAIN_CONTRIBUTION",
+        "DATA_QUALITY_EFFECT",
+        "GENERALIZATION",
+        "OVERALL_SYSTEM_BEHAVIOR"
+      ]
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "statement": {
+      "type": "string",
+      "minLength": 1
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "PLAUSIBLE",
+        "COMPETING",
+        "WEAKLY_SUPPORTED",
+        "CONFLICTED",
+        "INSUFFICIENT_EVIDENCE",
+        "NOT_ASSESSABLE"
+      ]
+    },
+    "confidence": {
+      "type": "string",
+      "enum": [
+        "HIGH",
+        "MODERATE",
+        "LOW",
+        "NOT_ASSESSABLE"
+      ]
+    },
+    "supporting_interpretation_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^INT-[A-Z_]+-[0-9]{4}$"
+      },
+      "uniqueItems": true
+    },
+    "contradicting_interpretation_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^INT-[A-Z_]+-[0-9]{4}$"
+      },
+      "uniqueItems": true
+    },
+    "supporting_observation_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^OBS-[A-Z_]+-[0-9]{4}$"
+      },
+      "uniqueItems": true
+    },
+    "assumptions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "alternative_hypothesis_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^HYP-[A-Z_]+-[0-9]{4}$"
+      },
+      "uniqueItems": true
+    },
+    "evidence_gaps": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "falsifiability_statement": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "rationale": {
+      "type": "string",
+      "minLength": 1
+    },
+    "reasoning_rule_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "priority_score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "priority": {
+      "type": "string",
+      "enum": [
+        "HIGH",
+        "MEDIUM",
+        "LOW",
+        "NOT_ASSESSABLE"
+      ]
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "software_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_interpretation_schema_version": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "metadata": {
+      "type": "object"
+    }
+  }
+}

@@ -1,0 +1,577 @@
+{
+  "generated_at": "2026-07-31T08:57:46+00:00",
+  "hypotheses": [
+    {
+      "alternative_hypothesis_ids": [
+        "HYP-CHEMICAL_DISCRIMINATION-0002"
+      ],
+      "assumptions": [
+        "Validated Interpretation Engine outputs are the authoritative source for this hypothesis.",
+        "The hypothesis is not presented as an established fact."
+      ],
+      "category": "CHEMICAL_DISCRIMINATION",
+      "confidence": "MODERATE",
+      "contradicting_interpretation_ids": [],
+      "created_at": "2026-07-31T08:57:46+00:00",
+      "evidence_gaps": [
+        "The current interpretation package does not establish chemical identity as the only explanatory factor.",
+        "No external validation is available."
+      ],
+      "falsifiability_statement": "This hypothesis would be weakened if chemical-class labels cannot be distinguished after accounting for concentration, batch, and other correlated experimental structure.",
+      "hypothesis_id": "HYP-CHEMICAL_DISCRIMINATION-0001",
+      "metadata": {},
+      "priority": "MEDIUM",
+      "priority_score": 66.0,
+      "rationale": "Classification and fingerprint-structure interpretations support a testable chemical-discrimination hypothesis while leaving correlated-structure alternatives unresolved.",
+      "reasoning_rule_ids": [
+        "RULE-CHEMICAL-DISCRIMINATION-001"
+      ],
+      "software_version": "BSIP-2.2.0-hypothesis-engine",
+      "source_interpretation_schema_version": "BSIP-2.1.0",
+      "statement": "Different chemical classes may produce partially distinct multistrain response patterns that contribute to classification.",
+      "status": "PLAUSIBLE",
+      "supporting_interpretation_ids": [
+        "INT-CHEMICAL_CLASSIFICATION-0001",
+        "INT-FINGERPRINT_STRUCTURE-0001"
+      ],
+      "supporting_observation_ids": [
+        "OBS-CLASSIFICATION-0001",
+        "OBS-EXPLORATORY_ANALYSIS-0001",
+        "OBS-FINGERPRINT-0001"
+      ],
+      "tags": [
+        "chemical-discrimination"
+      ],
+      "title": "Chemical-class response-pattern distinction"
+    },
+    {
+      "alternative_hypothesis_ids": [
+        "HYP-CHEMICAL_DISCRIMINATION-0001"
+      ],
+      "assumptions": [
+        "Validated Interpretation Engine outputs are the authoritative source for this hypothesis.",
+        "The hypothesis is not presented as an established fact."
+      ],
+      "category": "CHEMICAL_DISCRIMINATION",
+      "confidence": "MODERATE",
+      "contradicting_interpretation_ids": [],
+      "created_at": "2026-07-31T08:57:46+00:00",
+      "evidence_gaps": [
+        "The interpretation package does not isolate concentration, batch, or correlated structure effects.",
+        "No external validation is available."
+      ],
+      "falsifiability_statement": "This competing hypothesis would be weakened if classification remains reproducible after correlated concentration, batch, and experimental-structure effects are accounted for.",
+      "hypothesis_id": "HYP-CHEMICAL_DISCRIMINATION-0002",
+      "metadata": {},
+      "priority": "MEDIUM",
+      "priority_score": 66.0,
+      "rationale": "The classification interpretation permits a competing explanation because internal classification performance alone cannot establish chemical identity as the sole source of separation.",
+      "reasoning_rule_ids": [
+        "RULE-CHEMICAL-DISCRIMINATION-001"
+      ],
+      "software_version": "BSIP-2.2.0-hypothesis-engine",
+      "source_interpretation_schema_version": "BSIP-2.1.0",
+      "statement": "Observed classification may depend partly on concentration, batch, or other correlated experimental structure rather than chemical identity alone.",
+      "status": "COMPETING",
+      "supporting_interpretation_ids": [
+        "INT-CHEMICAL_CLASSIFICATION-0001",
+        "INT-FINGERPRINT_STRUCTURE-0001"
+      ],
+      "supporting_observation_ids": [
+        "OBS-CLASSIFICATION-0001",
+        "OBS-EXPLORATORY_ANALYSIS-0001",
+        "OBS-FINGERPRINT-0001"
+      ],
+      "tags": [
+        "chemical-discrimination",
+        "competing"
+      ],
+      "title": "Correlated-structure alternative"
+    },
+    {
+      "alternative_hypothesis_ids": [
+        "HYP-CONCENTRATION_ENCODING-0002"
+      ],
+      "assumptions": [
+        "Validated Interpretation Engine outputs are the authoritative source for this hypothesis.",
+        "The hypothesis is not presented as an established fact."
+      ],
+      "category": "CONCENTRATION_ENCODING",
+      "confidence": "LOW",
+      "contradicting_interpretation_ids": [],
+      "created_at": "2026-07-31T08:57:46+00:00",
+      "evidence_gaps": [
+        "Only one concentration-regression interpretation directly supports this hypothesis.",
+        "No external validation is available."
+      ],
+      "falsifiability_statement": "This hypothesis would be weakened if concentration-related prediction does not reproducibly exceed uninformative or label-permuted baselines under comparable internal evaluation.",
+      "hypothesis_id": "HYP-CONCENTRATION_ENCODING-0001",
+      "metadata": {},
+      "priority": "LOW",
+      "priority_score": 34.0,
+      "rationale": "The concentration-regression interpretation supports possible concentration encoding while preserving the limitation that target variance remains incompletely accounted for.",
+      "reasoning_rule_ids": [
+        "RULE-CONCENTRATION-ENCODING-001"
+      ],
+      "software_version": "BSIP-2.2.0-hypothesis-engine",
+      "source_interpretation_schema_version": "BSIP-2.1.0",
+      "statement": "Biosensor response profiles may contain concentration-related information, but the current feature representation does not capture all concentration-dependent variation.",
+      "status": "WEAKLY_SUPPORTED",
+      "supporting_interpretation_ids": [
+        "INT-CONCENTRATION_REGRESSION-0001"
+      ],
+      "supporting_observation_ids": [
+        "OBS-REGRESSION-0001"
+      ],
+      "tags": [
+        "concentration"
+      ],
+      "title": "Concentration-related response encoding"
+    },
+    {
+      "alternative_hypothesis_ids": [
+        "HYP-CONCENTRATION_ENCODING-0001"
+      ],
+      "assumptions": [
+        "Validated Interpretation Engine outputs are the authoritative source for this hypothesis.",
+        "The hypothesis is not presented as an established fact."
+      ],
+      "category": "CONCENTRATION_ENCODING",
+      "confidence": "LOW",
+      "contradicting_interpretation_ids": [],
+      "created_at": "2026-07-31T08:57:46+00:00",
+      "evidence_gaps": [
+        "The interpretation package does not separate chemical-specific heterogeneity from feature representation.",
+        "No external validation is available."
+      ],
+      "falsifiability_statement": "This alternative hypothesis would be weakened if concentration-prediction limitations persist after chemical-specific response heterogeneity is accounted for.",
+      "hypothesis_id": "HYP-CONCENTRATION_ENCODING-0002",
+      "metadata": {},
+      "priority": "LOW",
+      "priority_score": 34.0,
+      "rationale": "The regression interpretation leaves more than one plausible explanation for limited concentration prediction performance.",
+      "reasoning_rule_ids": [
+        "RULE-CONCENTRATION-ENCODING-001"
+      ],
+      "software_version": "BSIP-2.2.0-hypothesis-engine",
+      "source_interpretation_schema_version": "BSIP-2.1.0",
+      "statement": "Concentration prediction may be limited by chemical-specific response heterogeneity rather than insufficient temporal information.",
+      "status": "COMPETING",
+      "supporting_interpretation_ids": [
+        "INT-CONCENTRATION_REGRESSION-0001"
+      ],
+      "supporting_observation_ids": [
+        "OBS-REGRESSION-0001"
+      ],
+      "tags": [
+        "competing",
+        "concentration"
+      ],
+      "title": "Chemical-specific heterogeneity alternative"
+    },
+    {
+      "alternative_hypothesis_ids": [],
+      "assumptions": [
+        "Validated Interpretation Engine outputs are the authoritative source for this hypothesis.",
+        "The hypothesis is not presented as an established fact."
+      ],
+      "category": "DATA_QUALITY_EFFECT",
+      "confidence": "MODERATE",
+      "contradicting_interpretation_ids": [],
+      "created_at": "2026-07-31T08:57:46+00:00",
+      "evidence_gaps": [
+        "The interpretation package does not establish that QC limitations caused any specific performance result.",
+        "No external validation is available."
+      ],
+      "falsifiability_statement": "This hypothesis would be weakened if downstream estimates remain reproducible in interpretation packages without active QC limitations.",
+      "hypothesis_id": "HYP-DATA_QUALITY_EFFECT-0001",
+      "metadata": {},
+      "priority": "MEDIUM",
+      "priority_score": 62.0,
+      "rationale": "Data-quality and overall-evidence interpretations support a QC-uncertainty hypothesis without claiming that QC limitations caused a specific estimate.",
+      "reasoning_rule_ids": [
+        "RULE-DATA-QUALITY-EFFECT-001"
+      ],
+      "software_version": "BSIP-2.2.0-hypothesis-engine",
+      "source_interpretation_schema_version": "BSIP-2.1.0",
+      "statement": "Active QC limitations may contribute to uncertainty in downstream classification and regression estimates.",
+      "status": "PLAUSIBLE",
+      "supporting_interpretation_ids": [
+        "INT-DATA_QUALITY-0001",
+        "INT-OVERALL_EVIDENCE-0001"
+      ],
+      "supporting_observation_ids": [
+        "OBS-BLIND_PREDICTION-0001",
+        "OBS-CLASSIFICATION-0001",
+        "OBS-QC-0001",
+        "OBS-REGRESSION-0001",
+        "OBS-VALIDATION-0001"
+      ],
+      "tags": [
+        "data-quality"
+      ],
+      "title": "Data-quality contribution to uncertainty"
+    },
+    {
+      "alternative_hypothesis_ids": [
+        "HYP-FEATURE_REPRESENTATION-0002"
+      ],
+      "assumptions": [
+        "Validated Interpretation Engine outputs are the authoritative source for this hypothesis.",
+        "The hypothesis is not presented as an established fact."
+      ],
+      "category": "FEATURE_REPRESENTATION",
+      "confidence": "MODERATE",
+      "contradicting_interpretation_ids": [],
+      "created_at": "2026-07-31T08:57:46+00:00",
+      "evidence_gaps": [
+        "No direct causal test is available.",
+        "No external validation is available."
+      ],
+      "falsifiability_statement": "This hypothesis would be weakened if window-based temporal features do not reproducibly improve internal benchmarks after model capacity and feature count are accounted for.",
+      "hypothesis_id": "HYP-FEATURE_REPRESENTATION-0001",
+      "metadata": {},
+      "priority": "MEDIUM",
+      "priority_score": 58.0,
+      "rationale": "Feature-engineering and feature-selection interpretations support a feature-representation hypothesis without establishing a causal feature mechanism.",
+      "reasoning_rule_ids": [
+        "RULE-FEATURE-REPRESENTATION-001"
+      ],
+      "software_version": "BSIP-2.2.0-hypothesis-engine",
+      "source_interpretation_schema_version": "BSIP-2.1.0",
+      "statement": "Window-based temporal features may capture response information not fully represented by the reference feature configuration.",
+      "status": "PLAUSIBLE",
+      "supporting_interpretation_ids": [
+        "INT-FEATURE_ENGINEERING-0001",
+        "INT-FEATURE_SELECTION-0001"
+      ],
+      "supporting_observation_ids": [
+        "OBS-FEATURE_ENGINEERING-0001",
+        "OBS-FEATURE_SELECTION-0001"
+      ],
+      "tags": [
+        "feature-representation"
+      ],
+      "title": "Window-based temporal feature representation"
+    },
+    {
+      "alternative_hypothesis_ids": [
+        "HYP-FEATURE_REPRESENTATION-0001"
+      ],
+      "assumptions": [
+        "Validated Interpretation Engine outputs are the authoritative source for this hypothesis.",
+        "The hypothesis is not presented as an established fact."
+      ],
+      "category": "FEATURE_REPRESENTATION",
+      "confidence": "MODERATE",
+      "contradicting_interpretation_ids": [],
+      "created_at": "2026-07-31T08:57:46+00:00",
+      "evidence_gaps": [
+        "The interpretation package does not isolate dimensionality from temporal information content.",
+        "No external validation is available."
+      ],
+      "falsifiability_statement": "This competing hypothesis would be weakened if benchmark improvements remain reproducible after feature dimensionality and model flexibility are accounted for.",
+      "hypothesis_id": "HYP-FEATURE_REPRESENTATION-0002",
+      "metadata": {},
+      "priority": "MEDIUM",
+      "priority_score": 58.0,
+      "rationale": "The feature-engineering interpretation reports benchmark association but cannot distinguish feature information content from dimensionality or model-flexibility alternatives.",
+      "reasoning_rule_ids": [
+        "RULE-FEATURE-REPRESENTATION-001"
+      ],
+      "software_version": "BSIP-2.2.0-hypothesis-engine",
+      "source_interpretation_schema_version": "BSIP-2.1.0",
+      "statement": "The reported benchmark improvement may partly reflect increased feature dimensionality or model flexibility rather than uniquely informative temporal biology.",
+      "status": "COMPETING",
+      "supporting_interpretation_ids": [
+        "INT-FEATURE_ENGINEERING-0001",
+        "INT-FEATURE_SELECTION-0001"
+      ],
+      "supporting_observation_ids": [
+        "OBS-FEATURE_ENGINEERING-0001",
+        "OBS-FEATURE_SELECTION-0001"
+      ],
+      "tags": [
+        "competing",
+        "feature-representation"
+      ],
+      "title": "Dimensionality or flexibility alternative"
+    },
+    {
+      "alternative_hypothesis_ids": [],
+      "assumptions": [
+        "Validated Interpretation Engine outputs are the authoritative source for this hypothesis.",
+        "The hypothesis is not presented as an established fact."
+      ],
+      "category": "GENERALIZATION",
+      "confidence": "LOW",
+      "contradicting_interpretation_ids": [],
+      "created_at": "2026-07-31T08:57:46+00:00",
+      "evidence_gaps": [
+        "True blind labels are absent.",
+        "No external validation is available."
+      ],
+      "falsifiability_statement": "This hypothesis would be weakened if independently labelled unknown samples show reproducible performance patterns consistent with the internal evaluation.",
+      "hypothesis_id": "HYP-GENERALIZATION-0001",
+      "metadata": {},
+      "priority": "HIGH",
+      "priority_score": 72.0,
+      "rationale": "Blind-validation, classification, and regression interpretations support a generalization-boundary hypothesis because the available blind-prediction interpretation does not establish external validation performance.",
+      "reasoning_rule_ids": [
+        "RULE-GENERALIZATION-001"
+      ],
+      "software_version": "BSIP-2.2.0-hypothesis-engine",
+      "source_interpretation_schema_version": "BSIP-2.1.0",
+      "statement": "Performance observed during internal evaluation may not fully generalize to independently labelled unknown samples.",
+      "status": "WEAKLY_SUPPORTED",
+      "supporting_interpretation_ids": [
+        "INT-BLIND_VALIDATION-0001",
+        "INT-CHEMICAL_CLASSIFICATION-0001",
+        "INT-CONCENTRATION_REGRESSION-0001"
+      ],
+      "supporting_observation_ids": [
+        "OBS-BLIND_PREDICTION-0001",
+        "OBS-CLASSIFICATION-0001",
+        "OBS-REGRESSION-0001"
+      ],
+      "tags": [
+        "generalization"
+      ],
+      "title": "Internal-to-external generalization boundary"
+    },
+    {
+      "alternative_hypothesis_ids": [],
+      "assumptions": [
+        "Validated Interpretation Engine outputs are the authoritative source for this hypothesis.",
+        "The hypothesis is not presented as an established fact."
+      ],
+      "category": "OVERALL_SYSTEM_BEHAVIOR",
+      "confidence": "MODERATE",
+      "contradicting_interpretation_ids": [],
+      "created_at": "2026-07-31T08:57:46+00:00",
+      "evidence_gaps": [
+        "The evidence is based on internal evaluation.",
+        "The evidence lacks real external validation."
+      ],
+      "falsifiability_statement": "This hypothesis would be weakened if concentration-estimation interpretations become reproducibly comparable to or more informative than chemical-discrimination interpretations under the same evidence boundary.",
+      "hypothesis_id": "HYP-OVERALL_SYSTEM_BEHAVIOR-0001",
+      "metadata": {
+        "interpretation_validation_passed": true,
+        "source_interpretation_count": 9
+      },
+      "priority": "HIGH",
+      "priority_score": 80.0,
+      "rationale": "Classification, regression, blind-validation, and overall-evidence interpretations support a system-level hypothesis about relative information content under the current evidence boundary.",
+      "reasoning_rule_ids": [
+        "RULE-OVERALL-SYSTEM-BEHAVIOR-001"
+      ],
+      "software_version": "BSIP-2.2.0-hypothesis-engine",
+      "source_interpretation_schema_version": "BSIP-2.1.0",
+      "statement": "The multistrain biosensor array may be more informative for chemical identity discrimination than for precise concentration estimation under the current dataset and feature representation.",
+      "status": "PLAUSIBLE",
+      "supporting_interpretation_ids": [
+        "INT-BLIND_VALIDATION-0001",
+        "INT-CHEMICAL_CLASSIFICATION-0001",
+        "INT-CONCENTRATION_REGRESSION-0001",
+        "INT-DATA_QUALITY-0001",
+        "INT-FEATURE_ENGINEERING-0001",
+        "INT-FEATURE_SELECTION-0001",
+        "INT-FINGERPRINT_STRUCTURE-0001",
+        "INT-OVERALL_EVIDENCE-0001",
+        "INT-STRAIN_CONTRIBUTION-0001"
+      ],
+      "supporting_observation_ids": [
+        "OBS-BLIND_PREDICTION-0001",
+        "OBS-CLASSIFICATION-0001",
+        "OBS-EXPLORATORY_ANALYSIS-0001",
+        "OBS-FEATURE_ENGINEERING-0001",
+        "OBS-FEATURE_SELECTION-0001",
+        "OBS-FINGERPRINT-0001",
+        "OBS-QC-0001",
+        "OBS-REGRESSION-0001",
+        "OBS-STRAIN_CONTRIBUTION-0001",
+        "OBS-VALIDATION-0001"
+      ],
+      "tags": [
+        "overall-system-behavior"
+      ],
+      "title": "Classification-versus-concentration information balance"
+    },
+    {
+      "alternative_hypothesis_ids": [
+        "HYP-STRAIN_CONTRIBUTION-0002"
+      ],
+      "assumptions": [
+        "Validated Interpretation Engine outputs are the authoritative source for this hypothesis.",
+        "The hypothesis is not presented as an established fact."
+      ],
+      "category": "STRAIN_CONTRIBUTION",
+      "confidence": "MODERATE",
+      "contradicting_interpretation_ids": [],
+      "created_at": "2026-07-31T08:57:46+00:00",
+      "evidence_gaps": [
+        "No specific strain is identified by the interpretation package as biologically important.",
+        "No external validation is available."
+      ],
+      "falsifiability_statement": "This hypothesis would be weakened if strain-removal or strain-subset interpretations do not reproducibly change classification-related evidence.",
+      "hypothesis_id": "HYP-STRAIN_CONTRIBUTION-0001",
+      "metadata": {},
+      "priority": "MEDIUM",
+      "priority_score": 56.0,
+      "rationale": "Strain-contribution and classification interpretations support a testable nonredundancy hypothesis without assigning importance to a named strain.",
+      "reasoning_rule_ids": [
+        "RULE-STRAIN-CONTRIBUTION-001"
+      ],
+      "software_version": "BSIP-2.2.0-hypothesis-engine",
+      "source_interpretation_schema_version": "BSIP-2.1.0",
+      "statement": "Individual strains may contribute nonredundant information to the multistrain classification fingerprint.",
+      "status": "PLAUSIBLE",
+      "supporting_interpretation_ids": [
+        "INT-CHEMICAL_CLASSIFICATION-0001",
+        "INT-STRAIN_CONTRIBUTION-0001"
+      ],
+      "supporting_observation_ids": [
+        "OBS-CLASSIFICATION-0001",
+        "OBS-STRAIN_CONTRIBUTION-0001"
+      ],
+      "tags": [
+        "strain-contribution"
+      ],
+      "title": "Nonredundant strain contribution"
+    },
+    {
+      "alternative_hypothesis_ids": [
+        "HYP-STRAIN_CONTRIBUTION-0001"
+      ],
+      "assumptions": [
+        "Validated Interpretation Engine outputs are the authoritative source for this hypothesis.",
+        "The hypothesis is not presented as an established fact."
+      ],
+      "category": "STRAIN_CONTRIBUTION",
+      "confidence": "MODERATE",
+      "contradicting_interpretation_ids": [],
+      "created_at": "2026-07-31T08:57:46+00:00",
+      "evidence_gaps": [
+        "The interpretation package does not distinguish nonredundant strain information from sampling variability.",
+        "No external validation is available."
+      ],
+      "falsifiability_statement": "This alternative hypothesis would be weakened if differential strain contribution remains reproducible under balanced chemical-response coverage.",
+      "hypothesis_id": "HYP-STRAIN_CONTRIBUTION-0002",
+      "metadata": {},
+      "priority": "MEDIUM",
+      "priority_score": 56.0,
+      "rationale": "The strain-contribution interpretation supports evaluation of differential contribution while leaving sampling variability as a competing explanation.",
+      "reasoning_rule_ids": [
+        "RULE-STRAIN-CONTRIBUTION-001"
+      ],
+      "software_version": "BSIP-2.2.0-hypothesis-engine",
+      "source_interpretation_schema_version": "BSIP-2.1.0",
+      "statement": "Observed strain contribution differences may reflect sampling variability or uneven chemical-response coverage.",
+      "status": "COMPETING",
+      "supporting_interpretation_ids": [
+        "INT-CHEMICAL_CLASSIFICATION-0001",
+        "INT-STRAIN_CONTRIBUTION-0001"
+      ],
+      "supporting_observation_ids": [
+        "OBS-CLASSIFICATION-0001",
+        "OBS-STRAIN_CONTRIBUTION-0001"
+      ],
+      "tags": [
+        "competing",
+        "strain-contribution"
+      ],
+      "title": "Sampling-variability strain alternative"
+    },
+    {
+      "alternative_hypothesis_ids": [],
+      "assumptions": [
+        "Validated Interpretation Engine outputs are the authoritative source for this hypothesis.",
+        "The hypothesis is not presented as an established fact."
+      ],
+      "category": "TEMPORAL_INFORMATION",
+      "confidence": "MODERATE",
+      "contradicting_interpretation_ids": [],
+      "created_at": "2026-07-31T08:57:46+00:00",
+      "evidence_gaps": [
+        "No direct causal test is available.",
+        "No independent temporal-feature ablation is documented in the interpretation package.",
+        "No external validation is available."
+      ],
+      "falsifiability_statement": "This hypothesis would be weakened if models using temporally resolved features do not reproducibly outperform equivalent models restricted to static or endpoint features.",
+      "hypothesis_id": "HYP-TEMPORAL_INFORMATION-0001",
+      "metadata": {},
+      "priority": "HIGH",
+      "priority_score": 73.0,
+      "rationale": "Fingerprint-structure, feature-engineering, and classification interpretations jointly support a testable temporal-information explanation without establishing causation.",
+      "reasoning_rule_ids": [
+        "RULE-TEMPORAL-INFORMATION-001"
+      ],
+      "software_version": "BSIP-2.2.0-hypothesis-engine",
+      "source_interpretation_schema_version": "BSIP-2.1.0",
+      "statement": "Temporal characteristics of the biosensor response profiles may contribute discriminatory information beyond static summary measurements.",
+      "status": "PLAUSIBLE",
+      "supporting_interpretation_ids": [
+        "INT-CHEMICAL_CLASSIFICATION-0001",
+        "INT-FEATURE_ENGINEERING-0001",
+        "INT-FINGERPRINT_STRUCTURE-0001"
+      ],
+      "supporting_observation_ids": [
+        "OBS-CLASSIFICATION-0001",
+        "OBS-EXPLORATORY_ANALYSIS-0001",
+        "OBS-FEATURE_ENGINEERING-0001",
+        "OBS-FINGERPRINT-0001"
+      ],
+      "tags": [
+        "temporal-information"
+      ],
+      "title": "Temporal information contribution"
+    }
+  ],
+  "schema_version": "BSIP-2.2.0",
+  "software_version": "BSIP-2.2.0-hypothesis-engine",
+  "source_interpretation_directory": "C:\\Users\\USER\\Desktop\\biosensor_fingerprint_ml\\.pytest_tmp\\test_generalization_not_high_c0\\interpretations",
+  "validation_summary": {
+    "causal_overclaim_count": 0,
+    "competing_hypothesis_link_issue_count": 0,
+    "confidence_policy_issue_count": 0,
+    "critical_issue_count": 0,
+    "deterministic_ordering_issue_count": 0,
+    "missing_dependency_count": 0,
+    "missing_falsifiability_count": 0,
+    "output_readability_checks": {
+      "hypotheses.csv": {
+        "readable": true,
+        "reason": ""
+      },
+      "hypotheses.json": {
+        "readable": true,
+        "reason": ""
+      },
+      "hypotheses.md": {
+        "readable": true,
+        "reason": ""
+      },
+      "hypothesis_competition_map.csv": {
+        "readable": true,
+        "reason": ""
+      },
+      "hypothesis_dependencies.csv": {
+        "readable": true,
+        "reason": ""
+      },
+      "hypothesis_summary.json": {
+        "readable": true,
+        "reason": ""
+      },
+      "hypothesis_validation.json": {
+        "readable": true,
+        "reason": ""
+      }
+    },
+    "recommendation_language_issue_count": 0,
+    "structured_validation_issues": [],
+    "unsupported_hypothesis_count": 0,
+    "validation_passed": true,
+    "warning_count": 0
+  }
+}
